@@ -20,12 +20,12 @@ const kAppMerah = Color(0xFFf07167);
 const kAppGrey = Color(0xFFEEEEEE);
 
 //
-final kAppPrimaryX = Colors.cyan[100];
-const kAppPrimary = Color(0xFF00afb9);
-const kAppSecondary = Color(0xFF59C1BD);
-const kAppPrimaryDark = Color(0xFF0081a7);
-const kAppText = Color(0xFF757575);
-const kAppBackground = Color(0xFFF1EFF1);
+const kAppPrimary = Color.fromRGBO(157,195,230,1);
+const kAppPrimaryDark = Color(0xffa2d2ff);
+const kAppPrimaryDark2 = Color(0xffcdb4db);
+const kAppPrimaryLight = Color(0xffbde0fe);
+const kAppSecondary = Color(0xffafcc);
+const kAppSecondaryLight = Color(0xffc8dd);
 
 //--Bootstrap Color Standards: (Primary, Secondary,Success,Danger,Warnig,Info,Light,Dark)
 //--Background Color:
@@ -41,6 +41,12 @@ const bgDefault = Color(0xffe0e0e0);
 
 
 //--Gradient:
+const kAppGradientPrim = LinearGradient(
+  colors: [kAppPrimary, kWhite, kAppPrimaryDark],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);
+
 const kPrimaryGradient = LinearGradient(
   colors: [kAppPrimary, kWhite],
   begin: Alignment.topCenter,

@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xcbt/modules/auth/all_auth.dart';
-// import 'package:xcbt/pages/home.dart';
+import 'package:xcbt/modules/intro/views/intro_vw.dart';
 
-import 'modules/frontpage/views/dashboard_vw.dart';
+import 'modules/task/views/task_app.dart';
+
+// import 'package:xcbt/pages/home.dart';
+// import 'modules/frontpage/views/dashboard_vw.dart';
 // import 'package:xcbt/modules/product/views/product_app_vw.dart';
 // import 'package:xcbt/modules/pengguna/views/pengguna_app_vw.dart';
 
 void main() {
-  runApp(const MyApp());
+  // runApp(const MyApp());
   // runApp(const ProductApp());
   // runApp(const PenggunaApp());
+  runApp(const TaskApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -25,9 +29,10 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
+        home: const IntroView(),
         // home: const Home(),
         // home: SigninView(),
-        home: DashboardView(),
+        // home: DashboardView(),
       ),
     );
   }

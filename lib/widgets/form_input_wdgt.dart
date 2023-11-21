@@ -2,6 +2,7 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:xcbt/configs/all_configs.dart';
+import 'package:xcbt/widgets/all_widgets.dart';
 
 class FormInputText extends StatelessWidget {
   FormInputText(

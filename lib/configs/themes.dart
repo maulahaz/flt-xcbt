@@ -35,19 +35,3 @@ TextStyle get myLinkText2 {
     decorationStyle: TextDecorationStyle.double,
   );
 }
-
-TextStyle getFont(double fontSize,
-    {Color? color, bool isBold = false, String? fontName}) {
-  return new TextStyle(
-    fontSize: fontSize,
-    color: color ?? kBlack,
-    fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
-    fontFamily: fontName,
-  );
-}
-
-TextStyle setBold() {
-  return new TextStyle(
-    fontWeight: FontWeight.bold,
-  );
-}
