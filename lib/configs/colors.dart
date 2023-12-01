@@ -12,11 +12,7 @@ const kBlack = Color(0xFF101010);
 const kTransparent = Colors.transparent;
 
 //--App Colors Pallets:
-const kAppBiruDark = Color(0xFF0081a7);
-final kAppBiruLight = Color(0xFF00afb9);
-const kAppKuning = Color(0xFFfdfcdc);
-const kAppCoklat = Color(0xFFfed9b7);
-const kAppMerah = Color(0xFFf07167);
+const kAppLight = Color(0xFFF8F5FF);
 const kAppGrey = Color(0xFFEEEEEE);
 
 //

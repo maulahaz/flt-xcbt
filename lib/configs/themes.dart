@@ -3,8 +3,8 @@ import 'package:xcbt/configs/all_configs.dart';
 
 class Themes {
   static final light = ThemeData(
-    primaryColor: Colors.cyan,
-    // primarySwatch: Colors.cyan,
+    // primaryColor: Colors.cyan,
+    primarySwatch: Colors.purple,
     brightness: Brightness.light,
     primaryIconTheme: IconThemeData(color: kWhite), //<- Ngrubah Warna Drawer
     fontFamily: 'Poppins', //'DancingScript', //'Nova', //

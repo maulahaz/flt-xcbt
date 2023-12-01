@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../all_notes.dart';
+import '../all_tasks.dart';
 
 class TaskView extends StatefulWidget {
   const TaskView({ Key? key }) : super(key: key);
