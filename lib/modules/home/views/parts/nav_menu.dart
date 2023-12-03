@@ -23,21 +23,21 @@ class NavMenu extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         decoration: BoxDecoration(
-          color: isActive ? kRed.withOpacity(0.4) : null,
+          color: isActive ? kAppPrimary.withOpacity(0.6) : null,
           borderRadius: const BorderRadius.all(Radius.circular(18.0)),
         ),
         child: Row(
           children: [
             ImageIcon(
               AssetImage(iconPath),
-              color: isActive ? kAppPrimary : kBlack,
+              color: isActive ? kWhite : kBlack,
             ),
             if (isActive) const SizedBox(width: 4.0),
             if (isActive)
               Text(
                 label,
                 style: const TextStyle(
-                  color: kAppPrimary,
+                  color: kBlack,
                   fontWeight: FontWeight.w500,
                 ),
               ),

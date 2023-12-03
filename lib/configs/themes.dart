@@ -3,15 +3,14 @@ import 'package:xcbt/configs/all_configs.dart';
 
 class Themes {
   static final light = ThemeData(
-    // primaryColor: Colors.cyan,
-    primarySwatch: Colors.purple,
+    primarySwatch: Colors.blue,
     brightness: Brightness.light,
     primaryIconTheme: IconThemeData(color: kWhite), //<- Ngrubah Warna Drawer
     fontFamily: 'Poppins', //'DancingScript', //'Nova', //
   );
 
   static final dark = ThemeData(
-    primaryColor: Colors.blue,
+    primaryColor: kAppGrey,
     brightness: Brightness.dark,
     // fontFamily: 'Poppins',
   );

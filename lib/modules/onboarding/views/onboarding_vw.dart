@@ -18,15 +18,15 @@ class _OnboardingViewState extends State<OnboardingView> {
 
   final onboardingData = [
     OnboardingModel(
-      image: 'lib/assets/images/blue-grad.png',
+      image: 'lib/assets/images/screen1.png',
       text: 'Jelajahi Potensimu dengan Tes Online Akademik di CWB !',
     ),
     OnboardingModel(
-      image: 'lib/assets/images/calm-water.jpeg',
+      image: 'lib/assets/images/screen2.png',
       text: 'Jelajahi Potensimu dengan Tes Online Akademik di CWB !',
     ),
     OnboardingModel(
-      image: 'lib/assets/images/bright-landscape.jpg',
+      image: 'lib/assets/images/screen3.png',
       text: 'Jelajahi Potensimu dengan Tes Online Akademik di CWB !',
     ),
   ];
@@ -50,7 +50,7 @@ class _OnboardingViewState extends State<OnboardingView> {
             height: 400.0,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('lib/assets/images/naturaleza.jpg'),
+                image: AssetImage('lib/assets/images/ornament.png'),
                 fit: BoxFit.contain,
               ),
             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:xcbt/configs/all_configs.dart';
 
+import '../../authorization/x_authorizations.dart';
 import '../x_homes.dart';
 
 class DashboardView extends StatefulWidget {
@@ -19,9 +20,7 @@ class _DashboardViewState extends State<DashboardView> {
     const Center(
       child: Text('Notif'),
     ),
-    const Center(
-      child: Text('Profile'),
-    ),
+    LogoutView(),
   ];
 
   void _onItemTapped(int index) {

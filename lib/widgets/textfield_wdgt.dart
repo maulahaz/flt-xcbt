@@ -19,7 +19,7 @@ class MyTextField extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12.0),
       height: 60.0,
-      color: kAppLight,
+      color: kAppPrimary.withOpacity(0.2),
       child: TextFormField(
         controller: controller,
         onChanged: onChanged,

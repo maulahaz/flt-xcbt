@@ -22,6 +22,7 @@ class _LoginViewState extends State<LoginView> {
     return Scaffold(
       backgroundColor: kWhite,
       appBar: AppBar(
+        backgroundColor: kAppPrimary,
         centerTitle: true,
         title: const Text('Log in'),
       ),

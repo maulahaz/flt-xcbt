@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  cached_network_image: ^3.3.0
   cupertino_icons: ^1.0.2
   currency_text_input_formatter: ^2.1.10
   dio: ^5.3.3
@@ -37,6 +38,7 @@ dependencies:
   flutter_svg: ^2.0.9
   glassmorphism: ^3.0.0
   http: ^1.1.0
+  shared_preferences: ^2.2.2
   sqflite: ^2.3.0
 
 dev_dependencies:

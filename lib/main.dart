@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xcbt/configs/all_configs.dart';
 import 'package:xcbt/modules/auth/all_auth.dart';
 
+
 import 'modules/onboarding/x_onboardings.dart';
+import 'modules/authorization/x_authorizations.dart';
 // import 'modules/car/x_cars.dart';
 // import 'modules/frontpage/x_frontpage.dart';
 // import 'package:xcbt/modules/intro/views/intro_vw.dart';
@@ -23,8 +25,11 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => SignupBloc()),
+        BlocProvider(create: (context) => AuthBloc()),
+      ],
       child: MaterialApp(
         title: 'FIC10-CBT-APK: XCBT',
         debugShowCheckedModeBanner: false,
