@@ -77,7 +77,7 @@ class _RegisterViewState extends State<RegisterView> {
               );
             }
             if (state is SignupLoaded) {
-              // AuthLocalDatasource().saveAuthData(state);
+              AuthorizationService.saveAuthData(state.result);
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text('New User Successfully Registered'),

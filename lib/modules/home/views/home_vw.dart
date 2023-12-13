@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xcbt/extensions/x_extensions.dart';
 
 import '../x_homes.dart';
 
@@ -36,14 +37,14 @@ class _HomeViewState extends State<HomeView> {
                 imagePath: 'lib/assets/images/about-us.png',
                 label: 'About Us',
                 onPressed: () {
-                  // context.push(const AboutUsView());
+                  context.push(const AboutUsView());
                 },
               ),
               MenuHome(
                 imagePath: 'lib/assets/images/tips.png',
                 label: 'Tips & Tricks ',
                 onPressed: () {
-                  // context.push(const TipsAndTricksView());
+                  context.push(const TipsAndTricksView());
                 },
               ),
               MenuHome(
