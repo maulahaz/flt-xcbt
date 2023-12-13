@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xcbt/configs/all_configs.dart';
 import 'package:xcbt/extensions/x_extensions.dart';
 import 'package:xcbt/widgets/all_widgets.dart';
@@ -51,12 +52,50 @@ class _LoginViewState extends State<LoginView> {
             ),
           ),
           const SizedBox(height: 42.0),
-          Button.filled(
-            onPressed: () {
-              context.pushReplacement(const DashboardView());
-            },
-            label: 'LOG IN',
-          ),
+          // Button.filled(
+          //   onPressed: () {
+          //     context.pushReplacement(const DashboardView());
+          //   },
+          //   label: 'LOG IN',
+          // ),
+          BlocConsumer<SigninBloc, SigninState>(listener: (context, state) {
+            if (state is SigninLoading) {
+              Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (state is SigninValidation) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                    content: Text("${state.value}"), backgroundColor: kRed),
+              );
+            }
+            if (state is SigninError) {
+              print('Signin error');
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                    content: Text("${state.error}"), backgroundColor: kRed),
+              );
+            }
+            if (state is SigninSuccess) {
+              //simpan data ke local storage
+              AuthorizationService.saveAuthData(state.result);
+              //
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text('Welcome back. \nSignin accepted'),
+                backgroundColor: Colors.green,
+              ));
+              context.pushReplacement(DashboardView());
+            }
+            ;
+          }, builder: (context, state) {
+            return MyButtons.primary(context, 'Log In', () {
+              // context.pushReplacement(DashboardPage());
+              context.read<SigninBloc>().add(GetSignin(
+                  email: emailController.text,
+                  password: passwordController.text));
+            });
+          }),
           const SizedBox(height: 24.0),
           GestureDetector(
             onTap: () {

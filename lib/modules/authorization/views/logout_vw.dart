@@ -20,7 +20,7 @@ class _LogoutViewState extends State<LogoutView> {
       child: ElevatedButton(
           onPressed: () {
             context.read<SignoutBloc>().add(GetSignout());
-            // AuthorizationService.removeAuthData();
+            AuthorizationService.removeAuthData();
             context.pushReplacement(const LoginView());
           },
           child: const Text('Logout')),

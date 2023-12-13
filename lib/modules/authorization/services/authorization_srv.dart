@@ -43,33 +43,44 @@ class AuthorizationService {
   //--Login:
   // ========================================================================
   static Future<Either<String, AuthorizationModel>> login(
-      Map<String, String> data) async {
-    final response = await http.post(
-      Uri.parse('${BASE_URL}/api/login'),
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(data),
-    );
-
-    if (response.statusCode == 200) {
-      return Right(AuthorizationModel.fromJson(response.body));
-    } else {
-      return Left('Login Fail');
+      Map<String, String> loginData) async {
+    try {
+      final response = await http.post(
+        Uri.parse(BASE_URL + 'login'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(loginData),
+      );
+      print(loginData);
+      print(jsonEncode(loginData));
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        return Right(AuthorizationModel.fromJson(response.body));
+      } else {
+        final responseBody = json.decode(response.body);
+        return Left(responseBody['message']);
+      }
+    } catch (e) {
+      return Left('Login Failed: ' + e.toString());
     }
   }
 
   //--Logout:
   // ========================================================================
   static Future<Either<String, String>> logout() async {
+    //--Get AccessToken before deleting AuthData:
     final authData = await getAuthData();
     final response = await http.post(
-      Uri.parse('${BASE_URL}/api/logout'),
+      Uri.parse('${BASE_URL}/logout'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer ${authData.accessToken}',
       },
     );
+
+    //--Remove AuthData:
+    // await removeAuthData();
 
     if (response.statusCode == 200) {
       return const Right('Logout Success');
