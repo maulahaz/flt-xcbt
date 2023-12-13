@@ -55,14 +55,19 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
         'email': event.email,
         'password': event.password,
       };
-      await AuthorizationService.register(dataRequest).then((val) {
-        // SharedPreferences prefs = await SharedPreferences.getInstance();
-        // prefs.setString('email', "${event.email}");
-        // prefs.setString('password', "${event.password}");
-        emit(SignupLoaded(result: val));
-      }).onError((error, stackTrace) {
-        emit(SignupError(error.toString()));
-      });
+      final response =
+          await AuthorizationService.register(dataRequest); //.then((val) {
+      response.fold(
+        (L) => emit(SignupError(L)),
+        (R) => emit(SignupLoaded(result: R)),
+      );
+      // SharedPreferences prefs = await SharedPreferences.getInstance();
+      // prefs.setString('email', "${event.email}");
+      // prefs.setString('password', "${event.password}");
+      // emit(SignupLoaded(result: val));
+      // }).onError((error, stackTrace) {
+      //   emit(SignupError(error.toString()));
+      // });
     }
   }
 }

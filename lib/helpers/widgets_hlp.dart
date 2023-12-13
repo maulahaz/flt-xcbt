@@ -1,8 +1,9 @@
-
 import 'package:flutter/material.dart';
 
 import '../configs/all_configs.dart';
 
+//--Get Font Style Function:
+// ========================================================================
 TextStyle getFont(double fontSize,
     {Color? color, bool isBold = false, String? fontName}) {
   return new TextStyle(

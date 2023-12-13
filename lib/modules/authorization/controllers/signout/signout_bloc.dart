@@ -7,17 +7,18 @@ part 'signout_state.dart';
 
 class SignoutBloc extends Bloc<SignoutEvent, SignoutState> {
   SignoutBloc() : super(SignoutInitial()) {
-    on<SignoutEvent>((event, emit) {});
+    // on<SignoutEvent>((event, emit) {});
     on<GetSignout>(_handleSignout);
   }
 
-  _handleSignout(GetSignout event, Emitter<SignoutState> emit) async {
+  Future<void> _handleSignout(event, emit) async {
     emit(SignoutLoading());
     // await AuthorizationService.removeAuthData();
-    await AuthorizationService.logout().then((val) {
-        emit(SignoutSuccess());
-      }).onError((error, stackTrace) {
-        emit(SignoutError(error.toString()));
-      });
+    final response = await AuthorizationService.logout();
+    response.fold(
+      (L) => emit(SignoutError(L)),
+      (R) => emit(SignoutSuccess()),
+    );
+
   }
 }

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xcbt/configs/all_configs.dart';
-import 'package:xcbt/modules/auth/all_auth.dart';
 
-
+import 'helpers/x_helpers.dart';
+import 'modules/home/x_homes.dart';
 import 'modules/onboarding/x_onboardings.dart';
 import 'modules/authorization/x_authorizations.dart';
+// import 'package:xcbt/modules/auth/all_auth.dart';
 // import 'modules/car/x_cars.dart';
 // import 'modules/frontpage/x_frontpage.dart';
 // import 'package:xcbt/modules/intro/views/intro_vw.dart';
@@ -28,7 +29,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => SignupBloc()),
-        BlocProvider(create: (context) => AuthBloc()),
+        BlocProvider(create: (context) => SigninBloc()),
+        BlocProvider(create: (context) => SignoutBloc()),
+        // BlocProvider(create: (context) => AuthBloc()),
       ],
       child: MaterialApp(
         title: 'FIC10-CBT-APK: XCBT',
@@ -39,7 +42,22 @@ class MyApp extends StatelessWidget {
         // home: SigninView(),
         // home: DashboardView(),
         // home: CarView(),
-        home: OnboardingView(),
+        // home: OnboardingView(),
+        home: FutureBuilder<AuthorizationModel>(
+            future: AuthorizationService.getAuthData(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return DashboardView();
+              } else {}
+              return FutureBuilder<bool>(
+                  future: MySessions.isAccessFirstTime(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return snapshot.data! ? LoginView() : OnboardingView();
+                    } else {}
+                    return OnboardingView();
+                  });
+            }),
       ),
     );
   }

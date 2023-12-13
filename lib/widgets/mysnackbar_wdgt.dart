@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:xcbt/configs/all_configs.dart';
 
-class MySnackbar {
+class MySnackbarXX {
   static showSnackbar(BuildContext context, String title, String subtitle,
       Color txColor, Color bgColor, Color iconColor) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(

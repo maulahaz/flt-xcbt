@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:xcbt/configs/all_configs.dart';
 import 'package:xcbt/widgets/all_widgets.dart';
-// import 'package:xcbt/configs/all_configs.dart';
-// import 'package:xcbt/widgets/all_widgets.dart';
 
+import '../../../helpers/x_helpers.dart';
 import '../x_frontpage.dart';
 
 class DashboardView extends StatelessWidget {
