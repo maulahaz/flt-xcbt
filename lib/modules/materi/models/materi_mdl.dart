@@ -1,36 +1,66 @@
+import 'dart:convert';
+
 class MateriModel {
-  final String image;
-  final String name;
-  final DateTime dateTime;
-  final String description;
+  final String status;
+  final List<Materi> data;
 
   MateriModel({
-    required this.image,
-    required this.name,
-    required this.dateTime,
-    required this.description,
+    required this.status,
+    required this.data,
   });
 
-  String get timeAgo {
-    final now = DateTime.now();
-    final difference = now.difference(dateTime);
+  factory MateriModel.fromJson(String str) =>
+      MateriModel.fromMap(json.decode(str));
 
-    if (difference.inSeconds < 60) {
-      return '${difference.inSeconds} seconds ago';
-    } else if (difference.inMinutes < 60) {
-      return '${difference.inMinutes} minutes ago';
-    } else if (difference.inHours < 24) {
-      return '${difference.inHours} hours ago';
-    } else if (difference.inDays == 1) {
-      return 'Yesterday';
-    } else if (difference.inDays < 30) {
-      return '${difference.inDays} days ago';
-    } else if (difference.inDays < 365) {
-      final months = (difference.inDays / 30).floor();
-      return '$months ${months == 1 ? 'month' : 'months'} ago';
-    } else {
-      final years = (difference.inDays / 365).floor();
-      return '$years ${years == 1 ? 'year' : 'years'} ago';
-    }
-  }
+  String toJson() => json.encode(toMap());
+
+  factory MateriModel.fromMap(Map<String, dynamic> json) => MateriModel(
+        status: json["status"],
+        data: List<Materi>.from(json["data"].map((x) => Materi.fromMap(x))),
+      );
+
+  Map<String, dynamic> toMap() => {
+        "status": status,
+        "data": List<dynamic>.from(data.map((x) => x.toMap())),
+      };
+}
+
+class Materi {
+  final int id;
+  final String title;
+  final String content;
+  final String picture;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  Materi({
+    required this.id,
+    required this.title,
+    required this.content,
+    required this.picture,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  factory Materi.fromJson(String str) => Materi.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory Materi.fromMap(Map<String, dynamic> json) => Materi(
+        id: json["id"],
+        title: json["title"],
+        content: json["content"],
+        picture: json["picture"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
+
+  Map<String, dynamic> toMap() => {
+        "id": id,
+        "title": title,
+        "content": content,
+        "picture": picture,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+      };
 }

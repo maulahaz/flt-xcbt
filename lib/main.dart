@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xcbt/configs/all_configs.dart';
 
 import 'helpers/x_helpers.dart';
+import 'modules/content/x_contents.dart';
 import 'modules/home/x_homes.dart';
+import 'modules/materi/x_materis.dart';
 import 'modules/onboarding/x_onboardings.dart';
 import 'modules/authorization/x_authorizations.dart';
 // import 'package:xcbt/modules/auth/all_auth.dart';
@@ -31,7 +33,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => SignupBloc()),
         BlocProvider(create: (context) => SigninBloc()),
         BlocProvider(create: (context) => SignoutBloc()),
-        // BlocProvider(create: (context) => AuthBloc()),
+        BlocProvider(create: (context) => ContentBloc()),
+        BlocProvider(create: (context) => MateriBloc()),
       ],
       child: MaterialApp(
         title: 'FIC10-CBT-APK: XCBT',

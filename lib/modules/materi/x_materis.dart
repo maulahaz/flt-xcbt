@@ -1,14 +1,13 @@
 //--CONTROLLERS
-// export 'controllers/modules_ctr.dart';
+export 'controllers/materi_bloc.dart';
 
 //--MODELS
-// export 'models/onboarding_mdl.dart';
+export 'models/materi_mdl.dart';
 
 //--SERVICES
-// export 'services/modules_srv.dart';
+export 'services/materi_srv.dart';
 
 //--PAGES AND PARTS
-// export 'pages/materi_vw.dart';
-// export 'pages/parts/onboarding_content.dart';
-// export 'pages/parts/onboarding_indicator.dart';
-// export 'pages/parts/skip_btn.dart';
+export 'pages/materi_pg.dart';
+export 'pages/materi_detail_pg.dart';
+export 'pages/parts/materi_card.dart';

@@ -1,9 +1,9 @@
 //--CONTROLLERS
-export 'controllers/content_bloc.dart';
+// export 'controllers/content_bloc.dart';
 // export 'controllers/modules_ctr.dart';
 
 //--MODELS
-export 'models/content_mdl.dart';
+// export '../content/models/content_mdl.dart';
 
 //--SERVICES
 // export 'services/modules_srv.dart';

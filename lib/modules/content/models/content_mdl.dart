@@ -29,7 +29,7 @@ class Content {
   final int id;
   final String title;
   final String content;
-  final String image;
+  final String picture;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -37,7 +37,7 @@ class Content {
     required this.id,
     required this.title,
     required this.content,
-    required this.image,
+    required this.picture,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -50,7 +50,7 @@ class Content {
         id: json["id"],
         title: json["title"],
         content: json["content"],
-        image: json["image"],
+        picture: json["picture"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
       );
@@ -59,7 +59,7 @@ class Content {
         "id": id,
         "title": title,
         "content": content,
-        "image": image,
+        "picture": picture,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
       };

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xcbt/extensions/x_extensions.dart';
 
 import '../../../widgets/all_widgets.dart';
-import '../x_homes.dart';
+import '../../content/x_contents.dart';
 
 class TipsAndTricksView extends StatefulWidget {
   const TipsAndTricksView({super.key});
@@ -16,14 +16,14 @@ class TipsAndTricksView extends StatefulWidget {
 class _TipsAndTricksViewState extends State<TipsAndTricksView> {
   @override
   void initState() {
-    // context.read<ContentBloc>().add(const ContentEvent.getContentById('2'));
+    context.read<ContentBloc>().add(GetContentById('2'));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-        appBarTitle: const Text('Tips dan Trik'),
+        appBarTitle: const Text('Tips dan Tricks'),
         body: BlocBuilder<ContentBloc, ContentState>(
           builder: (context, state) {
             if (state is ContentLoading) {
@@ -38,7 +38,7 @@ class _TipsAndTricksViewState extends State<TipsAndTricksView> {
                   state.result.data.isEmpty
                       ? const SizedBox()
                       : CachedNetworkImage(
-                          imageUrl: state.result.data[0].image,
+                          imageUrl: state.result.data[0].picture,
                           placeholder: (context, url) =>
                               const Center(child: CircularProgressIndicator()),
                           errorWidget: (context, url, error) =>

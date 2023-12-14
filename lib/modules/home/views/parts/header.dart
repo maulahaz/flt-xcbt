@@ -49,7 +49,7 @@ class HeaderHome extends StatelessWidget {
                     Text(
                       'Halo,',
                       style: TextStyle(
-                        color: kBlue[700],
+                        color: kWhite,
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
                       ),
@@ -61,7 +61,7 @@ class HeaderHome extends StatelessWidget {
                             return Text(
                               snapshot.data!.user.name,
                               style: TextStyle(
-                                color: kBlue[700],
+                                color: kWhite,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400,
                               ),
