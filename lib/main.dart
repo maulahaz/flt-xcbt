@@ -8,14 +8,7 @@ import 'modules/home/x_homes.dart';
 import 'modules/materi/x_materis.dart';
 import 'modules/onboarding/x_onboardings.dart';
 import 'modules/authorization/x_authorizations.dart';
-// import 'package:xcbt/modules/auth/all_auth.dart';
-// import 'modules/car/x_cars.dart';
-// import 'modules/frontpage/x_frontpage.dart';
-// import 'package:xcbt/modules/intro/views/intro_vw.dart';
-// import 'modules/task/views/task_app.dart';
-// import 'package:xcbt/pages/home.dart';
-// import 'package:xcbt/modules/product/views/product_app_vw.dart';
-// import 'package:xcbt/modules/pengguna/views/pengguna_app_vw.dart';
+import 'modules/quiz/x_quizes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,6 +28,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => SignoutBloc()),
         BlocProvider(create: (context) => ContentBloc()),
         BlocProvider(create: (context) => MateriBloc()),
+        BlocProvider(create: (context) => ExamByCategBloc()),
       ],
       child: MaterialApp(
         title: 'FIC10-CBT-APK: XCBT',

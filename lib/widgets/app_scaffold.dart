@@ -27,8 +27,10 @@ class AppScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       backgroundColor: kAppPrimary,
       appBar: AppBar(
+        elevation: 0,
         toolbarHeight: toolbarHeight,
         titleTextStyle: const TextStyle(
           color: kWhite,

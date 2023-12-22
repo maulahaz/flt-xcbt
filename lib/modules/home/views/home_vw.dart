@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:xcbt/extensions/x_extensions.dart';
 
 import '../../materi/x_materis.dart';
+import '../../quiz/x_quizes.dart';
 import '../x_homes.dart';
 
 class HomeView extends StatefulWidget {
@@ -59,7 +60,7 @@ class _HomeViewState extends State<HomeView> {
                 imagePath: 'lib/assets/images/quiz.png',
                 label: 'Quiz',
                 onPressed: () {
-                  // context.push(const QuizListView());
+                  context.push(const QuizListPage());
                 },
               ),
             ],
