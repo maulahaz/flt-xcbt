@@ -4,8 +4,6 @@ import 'package:xcbt/extensions/x_extensions.dart';
 import '../../../../configs/all_configs.dart';
 import '../../x_quizes.dart';
 
-// import '../pages/quiz_start_page.dart';
-
 class QuizCard extends StatefulWidget {
   final QuizModel data;
   const QuizCard({super.key, required this.data});
@@ -19,6 +17,7 @@ class _QuizCardState extends State<QuizCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        print('Kategori: '+widget.data.kategori);
         context.push(QuizStartPage(data: widget.data));
       },
       child: Container(

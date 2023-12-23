@@ -24,11 +24,12 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => SignupBloc()),
-        BlocProvider(create: (context) => SigninBloc()),
+        BlocProvider(create: (context) => SigninBloc()), 
         BlocProvider(create: (context) => SignoutBloc()),
         BlocProvider(create: (context) => ContentBloc()),
         BlocProvider(create: (context) => MateriBloc()),
         BlocProvider(create: (context) => ExamByCategBloc()),
+        BlocProvider(create: (context) => DaftarSoalBloc()),
       ],
       child: MaterialApp(
         title: 'FIC10-CBT-APK: XCBT',

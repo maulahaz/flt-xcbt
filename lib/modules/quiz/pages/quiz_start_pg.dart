@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xcbt/extensions/x_extensions.dart';
 
 import '../../../widgets/all_widgets.dart';
 import '../x_quizes.dart';
@@ -18,9 +20,9 @@ class QuizStartPage extends StatefulWidget {
 class _QuizStartPageState extends State<QuizStartPage> {
   @override
   void initState() {
-    // context.read<UjianByKategoriBloc>().add(
-    //       UjianByKategoriEvent.getUjianByKategori(widget.data.kategori),
-    //     );
+    context.read<ExamByCategBloc>().add(
+          GetExamByCateg(widget.data.kategori),
+        );
     super.initState();
   }
 
@@ -32,66 +34,60 @@ class _QuizStartPageState extends State<QuizStartPage> {
       actions: [
         Image.asset('lib/assets/icons/clock.png', width: 24.0),
         SizedBox(width: 8.0),
-        // BlocListener<UjianByKategoriBloc, UjianByKategoriState>(
-        //   listener: (context, state) {
-        //     state.maybeWhen(
-        //       orElse: () {},
-        //       success: (e) {
-        //         if (e.timer == 0) {
-        //           //show dialog waktu habis
-        //           showDialog(
-        //               context: context,
-        //               builder: (context) => AlertDialog(
-        //                     title: const Text('Waktu Habis'),
-        //                     content: const Text(
-        //                         'Waktu anda telah habis, silahkan klik tombol selesai untuk melihat hasil'),
-        //                     actions: [
-        //                       TextButton(
-        //                           onPressed: () =>
-        //                               context.pushReplacement(QuizFinishPage(
-        //                                 data: widget.data,
-        //                                 timeRemaining: 0,
-        //                               )),
-        //                           child: const Text('Selesai'))
-        //                     ],
-        //                   ));
-        //         } else {
-        //           context.read<DaftarSoalBloc>().add(
-        //                 DaftarSoalEvent.getDaftarSoal(
-        //                   e.data,
-        //                 ),
-        //               );
-        //         }
-        //       },
-        //     );
-        //   },
-        //   child: BlocBuilder<UjianByKategoriBloc, UjianByKategoriState>(
-        //     builder: (context, state) {
-        //       return state.maybeMap(
-        //         orElse: () {
-        //           return const SizedBox();
-        //         },
-        //         success: (e) {
-        //           return CountdownTimer(
-        //             duration: e.response.timer,
-        //             onTimerCompletion: (timeRemaining) {
-        //               context.pushReplacement(QuizFinishPage(
-        //                 data: widget.data,
-        //                 timeRemaining: timeRemaining,
-        //               ));
-        //             },
-        //           );
-        //         },
-        //       );
-        //     },
-        //   ),
-        // ),
+        BlocListener<ExamByCategBloc, ExamByCategState>(
+          listener: (context, state) {
+            // if (state is ExamByCategSuccess) {
+            //   if (e.timer == 0) {
+            //     //show dialog waktu habis
+            //     showDialog(
+            //         context: context,
+            //         builder: (context) => AlertDialog(
+            //               title: const Text('Waktu Habis'),
+            //               content: const Text(
+            //                   'Waktu anda telah habis, silahkan klik tombol selesai untuk melihat hasil'),
+            //               actions: [
+            //                 TextButton(
+            //                     onPressed: () =>
+            //                         context.pushReplacement(QuizFinishPage(
+            //                           data: widget.data,
+            //                           timeRemaining: 0,
+            //                         )),
+            //                     child: const Text('Selesai'))
+            //               ],
+            //             ));
+            //   } else {
+            //     context.read<DaftarSoalBloc>().add(
+            //           GetDaftarSoal(
+            //             e.data,
+            //           ),
+            //         );
+            //   }
+            // },
+          },
+          child: BlocBuilder<ExamByCategBloc, ExamByCategState>(
+            builder: (context, state) {
+              if (state is ExamByCategSuccess) {
+                return CountdownTimer(
+                  duration: state.result.timer,
+                  onTimerCompletion: (timeRemaining) {
+                    context.pushReplacement(QuizFinishPage(
+                      data: widget.data,
+                      timeRemaining: timeRemaining,
+                    ));
+                  },
+                );
+              } else {
+                return Container();
+              }
+            },
+          ),
+        ),
         IconButton(
             onPressed: () {
-              // context.pushReplacement(QuizFinishPage(
-              //   data: widget.data,
-              //   timeRemaining: 0,
-              // ));
+              context.pushReplacement(QuizFinishPage(
+                data: widget.data,
+                timeRemaining: 0,
+              ));
             },
             icon: const Icon(
               Icons.done,

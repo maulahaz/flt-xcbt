@@ -14,7 +14,7 @@ class ExamByCategBloc extends Bloc<ExamByCategEvent, ExamByCategState> {
     emit(ExamByCategLoading());
     final response = await QuizService.getExamByCateg(event.category);
     // print('==>response');
-    // print(response);
+    // print(response.toString());
     response.fold(
       (L) => emit(ExamByCategError(L)),
       (R) => emit(ExamByCategSuccess(result: R)),
