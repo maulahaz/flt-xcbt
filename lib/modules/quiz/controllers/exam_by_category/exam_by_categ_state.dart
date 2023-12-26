@@ -4,6 +4,8 @@ sealed class ExamByCategState {}
 
 final class ExamByCategInitial extends ExamByCategState {}
 
+final class ExamByCategEmpty extends ExamByCategState {}
+
 final class ExamByCategLoading extends ExamByCategState {}
 
 final class ExamByCategSuccess extends ExamByCategState {

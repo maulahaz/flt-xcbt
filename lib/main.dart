@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => MateriBloc()),
         BlocProvider(create: (context) => ExamByCategBloc()),
         BlocProvider(create: (context) => DaftarSoalBloc()),
+        BlocProvider(create: (context) => CreateExamBloc()),
       ],
       child: MaterialApp(
         title: 'FIC10-CBT-APK: XCBT',

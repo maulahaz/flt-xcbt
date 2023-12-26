@@ -26,6 +26,8 @@ class _QuizMultiChoiceState extends State<QuizMultiChoice> {
       listener: (context, state) {},
       builder: (context, state) {
         if (state is DaftarSoalSuccess) {
+          print('--pertanyaan');
+          print(state.data[state.index].pertanyaan);
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -110,6 +112,7 @@ class _QuizMultiChoiceState extends State<QuizMultiChoice> {
         } else {
           return Center(
             child: CircularProgressIndicator(),
+            // child: Text('Daftar Soal N/A'),
           );
         }
       },

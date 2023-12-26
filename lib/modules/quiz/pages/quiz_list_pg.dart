@@ -84,9 +84,7 @@ class _QuizListPageState extends State<QuizListPage> {
           BlocListener<ExamByCategBloc, ExamByCategState>(
             listener: (context, state) {
               if (state is ExamByCategLoading) {
-                // context
-                //         .read<CreateUjianBloc>()
-                //         .add(const CreateUjianEvent.createUjian());
+                context.read<CreateExamBloc>().add(CreateExam());
                 // return Text('Empty Listener');
               }
             },

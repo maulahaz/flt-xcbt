@@ -37,7 +37,7 @@ class Question {
   final String opsiA;
   final String opsiB;
   final String opsiC;
-  final String dopsiD;
+  final String opsiD;
 
   Question({
     required this.id,
@@ -46,7 +46,7 @@ class Question {
     required this.opsiA,
     required this.opsiB,
     required this.opsiC,
-    required this.dopsiD,
+    required this.opsiD,
   });
 
   factory Question.fromJson(String str) => Question.fromMap(json.decode(str));
@@ -60,7 +60,7 @@ class Question {
         opsiA: json["opsi_a"],
         opsiB: json["opsi_b"],
         opsiC: json["opsi_c"],
-        dopsiD: json["opsi_d"],
+        opsiD: json["opsi_d"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -70,6 +70,6 @@ class Question {
         "opsi_a": opsiA,
         "opsi_b": opsiB,
         "opsi_c": opsiC,
-        "opsi_d": dopsiD,
+        "opsi_d": opsiD,
       };
 }
