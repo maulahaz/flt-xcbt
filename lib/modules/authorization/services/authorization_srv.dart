@@ -52,9 +52,9 @@ class AuthorizationService {
         },
         body: jsonEncode(loginData),
       );
-      print(loginData);
-      print(jsonEncode(loginData));
-      print(response.statusCode);
+      // print(loginData);
+      // print(jsonEncode(loginData));
+      // print(response.statusCode);
       if (response.statusCode == 200) {
         return Right(AuthorizationModel.fromJson(response.body));
       } else {

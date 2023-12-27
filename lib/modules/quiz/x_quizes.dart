@@ -2,6 +2,7 @@
 export 'controllers/exam_by_category/exam_by_categ_bloc.dart';
 export 'controllers/daftar_soal/daftar_soal_bloc.dart';
 export 'controllers/create_exam/create_exam_bloc.dart';
+export 'controllers/exam/exam_bloc.dart';
 
 //--MODELS
 export 'models/quiz_mdl.dart';

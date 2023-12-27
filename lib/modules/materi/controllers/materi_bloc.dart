@@ -13,8 +13,6 @@ class MateriBloc extends Bloc<MateriEvent, MateriState> {
   Future<void> _handleGetAllMateri(event, emit) async {
     emit(MateriLoading());
     final response = await MateriService.getAllMateri();
-    print('==>response');
-    print(response);
     response.fold(
       (L) => emit(MateriError(L)),
       (R) => emit(MateriSuccess(result: R)),

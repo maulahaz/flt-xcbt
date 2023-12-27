@@ -14,8 +14,6 @@ class ContentBloc extends Bloc<ContentEvent, ContentState> {
   Future<void> _handleGetContentById(event, emit) async {
     emit(ContentLoading());
     final response = await ContentService.getContentById(event.id);
-    print('==>response');
-    print(response);
     response.fold(
       (L) => emit(ContentError(L)),
       (R) => emit(ContentSuccess(result: R)),

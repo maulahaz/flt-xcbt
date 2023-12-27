@@ -13,12 +13,12 @@ class MateriService {
     var url = Uri.parse(BASE_URL + 'materi');
     final authData = await AuthorizationService.getAuthData();
     var response = await http.get(url, headers: {
-      'Materi-Type': 'application/json',
+      'Content-Type': 'application/json',
       'Authorization': 'Bearer ${authData.accessToken}'
     });
-    print('==>getAllMateri');
-    print(response.statusCode);
-    print(response.body);
+    // print('==>getAllMateri');
+    // print(response.statusCode);
+    // print(response.body);
     if (response.statusCode == 200) {
       return Right(MateriModel.fromJson(response.body));
     } else {

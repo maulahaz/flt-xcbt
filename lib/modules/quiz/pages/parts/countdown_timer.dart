@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../../../../configs/all_configs.dart';
+
 class CountdownTimer extends StatefulWidget {
   final int duration;
   final void Function(int timeRemaining) onTimerCompletion;
@@ -53,12 +55,16 @@ class _CountdownTimerState extends State<CountdownTimer> {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      '$_remainingMinutes : $_remainingSeconds',
-      style: const TextStyle(
-        color: Colors.white,
-        fontSize: 16,
-        fontWeight: FontWeight.w700,
+    return SizedBox(
+      width: 50,
+      child: Text(
+        '$_remainingMinutes : $_remainingSeconds',
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          color: kRed,
+          fontSize: 14,
+          fontWeight: FontWeight.w700,
+        ),
       ),
     );
   }

@@ -26,7 +26,7 @@ class _QuizListPageState extends State<QuizListPage> {
         name: 'Area-1',
         type: 'Multiple Choice',
         description:
-            'Tes angka adalah suatu jenis tes psikometri yang dirancang untuk mengukur kemampuan individu dalam memahami, menganalisis, dan menyelesaikan masalah yang melibatkan angka dan matematika.',
+            'Collection of some Question about Area-0 and 1',
         duration: 30,
         kategori: 'Area-1',
       ),
@@ -35,7 +35,7 @@ class _QuizListPageState extends State<QuizListPage> {
         name: 'Area-2',
         type: 'Multiple Choice',
         description:
-            'Tes logika adalah metode evaluasi yang digunakan untuk mengukur kemampuan seseorang dalam berpikir secara logis, analitis, dan rasional',
+            'Collection of some Question about Area-2',
         duration: 30,
         kategori: 'Area-2',
       ),
@@ -44,7 +44,7 @@ class _QuizListPageState extends State<QuizListPage> {
         name: 'Area-3',
         type: 'Multiple Choice',
         description:
-            'Tes verbal adalah suatu metode evaluasi yang digunakan untuk mengukur kemampuan seseorang dalam menggunakan dan memahami bahasa lisan atau tertulis.',
+            'Collection of some Question about Area-3',
         duration: 30,
         kategori: 'Area-3',
       ),
@@ -53,7 +53,7 @@ class _QuizListPageState extends State<QuizListPage> {
         name: 'Area-9',
         type: 'Multiple Choice',
         description:
-            'Tes verbal adalah suatu metode evaluasi yang digunakan untuk mengukur kemampuan seseorang dalam menggunakan dan memahami bahasa lisan atau tertulis.',
+            'Collection of some Question about Area-9',
         duration: 30,
         kategori: 'Area-9',
       ),
@@ -68,7 +68,7 @@ class _QuizListPageState extends State<QuizListPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'Kategori TPA',
+                'CBT Categories',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,

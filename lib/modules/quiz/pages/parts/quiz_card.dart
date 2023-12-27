@@ -17,7 +17,6 @@ class _QuizCardState extends State<QuizCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print('Kategori: '+widget.data.kategori);
         context.push(QuizStartPage(data: widget.data));
       },
       child: Container(
@@ -70,7 +69,7 @@ class _QuizCardState extends State<QuizCard> {
                   Text(
                     widget.data.description,
                     style: const TextStyle(
-                      fontSize: 10,
+                      fontSize: 12,
                       fontWeight: FontWeight.w300,
                     ),
                   ),

@@ -19,6 +19,7 @@ class QuizMultiChoice extends StatefulWidget {
 class _QuizMultiChoiceState extends State<QuizMultiChoice> {
   String selectedAnswer = '';
   String jawaban = '';
+  String answer = '';
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +27,6 @@ class _QuizMultiChoiceState extends State<QuizMultiChoice> {
       listener: (context, state) {},
       builder: (context, state) {
         if (state is DaftarSoalSuccess) {
-          print('--pertanyaan');
-          print(state.data[state.index].pertanyaan);
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -61,8 +60,8 @@ class _QuizMultiChoiceState extends State<QuizMultiChoice> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AnswerChoices(
-                    label: 'data[index].jawabanA',
-                    isSelected: selectedAnswer == 'data[index].jawabanA',
+                    label: state.data[state.index].opsiA,
+                    isSelected: selectedAnswer == state.data[state.index].opsiA,
                     onChanged: (value) {
                       setState(() {
                         selectedAnswer = value;
@@ -72,8 +71,8 @@ class _QuizMultiChoiceState extends State<QuizMultiChoice> {
                   ),
                   const SizedBox(height: 16.0),
                   AnswerChoices(
-                    label: 'data[index].jawabanB',
-                    isSelected: selectedAnswer == 'data[index].jawabanB',
+                    label: state.data[state.index].opsiB,
+                    isSelected: selectedAnswer == state.data[state.index].opsiB,
                     onChanged: (value) {
                       setState(() {
                         selectedAnswer = value;
@@ -83,8 +82,8 @@ class _QuizMultiChoiceState extends State<QuizMultiChoice> {
                   ),
                   const SizedBox(height: 16.0),
                   AnswerChoices(
-                    label: 'data[index].jawabanC',
-                    isSelected: selectedAnswer == 'data[index].jawabanC',
+                    label: state.data[state.index].opsiC,
+                    isSelected: selectedAnswer == state.data[state.index].opsiC,
                     onChanged: (value) {
                       setState(() {
                         selectedAnswer = value;
@@ -94,8 +93,8 @@ class _QuizMultiChoiceState extends State<QuizMultiChoice> {
                   ),
                   const SizedBox(height: 16.0),
                   AnswerChoices(
-                    label: 'data[index].jawabanD',
-                    isSelected: selectedAnswer == 'data[index].jawabanD',
+                    label: state.data[state.index].opsiD,
+                    isSelected: selectedAnswer == state.data[state.index].opsiD,
                     onChanged: (value) {
                       setState(() {
                         selectedAnswer = value;
@@ -106,7 +105,25 @@ class _QuizMultiChoiceState extends State<QuizMultiChoice> {
                 ],
               ),
               const SizedBox(height: 38.0),
-              MyButtons.primary(context, 'Next', () {})
+              jawaban.isEmpty
+                  ? MyButtons.disabled(context, 'Next')
+                  : state.isNext
+                      ? MyButtons.primary(context, 'Next', () {
+                          context.read<ExamBloc>().add(PostExamAnswer(
+                                soalId: state.data[state.index].id,
+                                answer: jawaban,
+                              ));
+                          context.read<DaftarSoalBloc>().add(NextDaftarSoal());
+                        })
+                      : MyButtons.danger(context, 'End', () {
+                          context.read<ExamBloc>().add(PostExamAnswer(
+                                soalId: state.data[state.index].id,
+                                answer: jawaban,
+                              ));
+                          context
+                              .read<ExamBloc>()
+                              .add(GetExamResult(widget.kategori));
+                        })
             ],
           );
         } else {

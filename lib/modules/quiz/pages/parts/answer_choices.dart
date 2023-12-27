@@ -55,29 +55,33 @@ class AnswerChoices extends StatelessWidget {
     return GestureDetector(
       onTap: () => onChanged(label),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(20)),
           color: isSelected ? kAppLight : kWhite,
+          border: Border.all(color: isSelected ? kAppPrimary : kAppLight)
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              label,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
+            Expanded(
+              child: Text(
+                label,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
             Container(
               width: 24,
               height: 24,
               decoration: ShapeDecoration(
-                color: isSelected ? kAppLight : kWhite,
+                color: isSelected ? kAppPrimary : kWhite,
                 shape: OvalBorder(
-                  side: BorderSide(
-                      width: isSelected ? 0 : 2, color: kAppPrimary),
+                  side:
+                      BorderSide(width: isSelected ? 1 : 2, color: kAppPrimary),
                 ),
               ),
             ),

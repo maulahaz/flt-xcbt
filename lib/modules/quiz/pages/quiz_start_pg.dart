@@ -33,113 +33,118 @@ class _QuizStartPageState extends State<QuizStartPage> {
     return AppScaffold(
       appBarTitle: Text(widget.data.name),
       actions: [
-        Image.asset('lib/assets/icons/clock.png', width: 24.0),
-        SizedBox(width: 8.0),
-        BlocListener<ExamByCategBloc, ExamByCategState>(
-          listener: (context, state) {
-            // if (state is ExamByCategSuccess) {
-            //   if (e.timer == 0) {
-            //     //show dialog waktu habis
-            //     showDialog(
-            //         context: context,
-            //         builder: (context) => AlertDialog(
-            //               title: const Text('Waktu Habis'),
-            //               content: const Text(
-            //                   'Waktu anda telah habis, silahkan klik tombol selesai untuk melihat hasil'),
-            //               actions: [
-            //                 TextButton(
-            //                     onPressed: () =>
-            //                         context.pushReplacement(QuizFinishPage(
-            //                           data: widget.data,
-            //                           timeRemaining: 0,
-            //                         )),
-            //                     child: const Text('Selesai'))
-            //               ],
-            //             ));
-            //   } else {
-            //     context.read<DaftarSoalBloc>().add(
-            //           GetDaftarSoal(
-            //             e.data,
-            //           ),
-            //         );
-            //   }
-            // },
-          },
-          child: BlocBuilder<ExamByCategBloc, ExamByCategState>(
-            builder: (context, state) {
-              if (state is ExamByCategSuccess) {
-                return CountdownTimer(
-                  duration: state.result.timer, //60
-                  onTimerCompletion: (timeRemaining) {
-                    context.pushReplacement(QuizFinishPage(
-                      data: widget.data,
-                      timeRemaining: timeRemaining,
-                    ));
-                  },
-                );
-              } else {
-                return Text('Time is Up');
-              }
-            },
-          ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset('lib/assets/icons/clock.png', width: 24.0),
+            SizedBox(width: 10.0),
+            BlocListener<ExamByCategBloc, ExamByCategState>(
+              listener: (context, state) {
+                if (state is ExamByCategSuccess) {
+                  if (state.result.timer == 0) {
+                    showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                              title: const Text('Time\'s up'),
+                              content: const Text(
+                                  'Time is elpased, please click button to check the result'),
+                              actions: [
+                                TextButton(
+                                    onPressed: () =>
+                                        context.pushReplacement(QuizFinishPage(
+                                          data: widget.data,
+                                          timeRemaining: 0,
+                                        )),
+                                    child: const Text('End'))
+                              ],
+                            ));
+                  } else {
+                    context.read<DaftarSoalBloc>().add(GetDaftarSoal(
+                          state.result.data,
+                        ));
+                  }
+                }
+                ;
+              },
+              child: BlocBuilder<ExamByCategBloc, ExamByCategState>(
+                builder: (context, state) {
+                  if (state is ExamByCategSuccess) {
+                    return CountdownTimer(
+                      duration: state.result.timer,
+                      onTimerCompletion: (timeRemaining) {
+                        context.pushReplacement(QuizFinishPage(
+                          data: widget.data,
+                          timeRemaining: timeRemaining,
+                        ));
+                      },
+                    );
+                  } else {
+                    return Text('End');
+                  }
+                },
+              ),
+            ),
+            IconButton(
+                onPressed: () {
+                  print('Give up');
+                  // context.pushReplacement(QuizFinishPage(
+                  //   data: widget.data,
+                  //   timeRemaining: 0,
+                  // ));
+                },
+                icon: const Icon(
+                  Icons.done,
+                  color: Colors.white,
+                )),
+          ],
         ),
-        IconButton(
-            onPressed: () {
-              print('Give up');
-              // context.pushReplacement(QuizFinishPage(
-              //   data: widget.data,
-              //   timeRemaining: 0,
-              // ));
-            },
-            icon: const Icon(
-              Icons.done,
-              color: Colors.white,
-            )),
-        const SizedBox(width: 24.0),
+
+        // const SizedBox(width: 24.0),
       ],
       body: ListView(
         padding: const EdgeInsets.all(30.0),
         children: [
           const Text(
-            'Pertanyaan',
+            'Question',
             style: TextStyle(
               fontSize: 18,
             ),
           ),
-          // BlocListener<HitungNilaiBloc, HitungNilaiState>(
-          //   listener: (context, state) {
-          //     state.maybeWhen(
-          //       orElse: () {},
-          //       success: (e) {
-          //         context.pushReplacement(QuizFinishPage(
-          //           data: widget.data,
-          //           timeRemaining: 0,
-          //         ));
-          //       },
-          //     );
-          //   },
-          BlocBuilder<ExamByCategBloc, ExamByCategState>(
-            builder: (context, state) {
-              if (state is ExamByCategSuccess) {
-                return Row(
-                  children: [
-                    Flexible(
-                      child: LinearProgressIndicator(
-                        value: 1 / state.result.data.length,
-                        color: kAppPrimary,
-                      ),
-                    ),
-                    const SizedBox(width: 16.0),
-                    Text(
-                      '${quizNumber}/${state.result.data.length}',
-                      style: const TextStyle(fontSize: 16),
-                    ),
-                  ],
-                );
-              } else {
-                return Text('Error di Timer');
+          BlocListener<ExamBloc, ExamState>(
+            listener: (context, state) {
+              if (state is GetExamResultState) {
+                context.pushReplacement(QuizFinishPage(
+                  data: widget.data,
+                  timeRemaining: 0,
+                ));
               }
             },
+            child: BlocBuilder<DaftarSoalBloc, DaftarSoalState>(
+              builder: (context, state) {
+                // if (state is DaftarSoalEmpty) {
+                //   return Text('Exam not available');
+                // }
+                if (state is DaftarSoalSuccess) {
+                  return Row(
+                    children: [
+                      Flexible(
+                        child: LinearProgressIndicator(
+                          value: (state.index + 1) / state.data.length,
+                          color: kAppPrimary,
+                        ),
+                      ),
+                      const SizedBox(width: 16.0),
+                      Text(
+                        '${(state.index + 1)}/${state.data.length}',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  );
+                } else {
+                  return Text('Error di Timer');
+                }
+              },
+            ),
           ),
           SizedBox(height: 16.0),
           QuizMultiChoice(

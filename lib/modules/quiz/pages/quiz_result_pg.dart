@@ -44,7 +44,7 @@ class QuizResultPage extends StatelessWidget {
     ];
 
     return AppScaffold(
-      appBarTitle: const Text('Hasil Tes'),
+      appBarTitle: const Text('Quiz Result'),
       body: ListView(
         children: [
           const SizedBox(height: 30.0),
@@ -59,7 +59,7 @@ class QuizResultPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Tes yang Tersedia',
+                  'Available Quiz',
                   style: TextStyle(
                     fontSize: 21,
                     fontWeight: FontWeight.w500,
@@ -93,7 +93,7 @@ class QuizResultPage extends StatelessWidget {
             // await stopKioskMode();
             context.popToRoot();
           },
-          label: 'Kembali ke Beranda',
+          label: 'Back to Dashboard',
         ),
       ),
     );

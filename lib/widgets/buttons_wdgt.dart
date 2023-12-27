@@ -28,7 +28,7 @@ class MyButtons {
     // );
 
     //--USING ELEVATED BUTTON v.2:
-    //----------------------------------------------------------------    
+    //----------------------------------------------------------------
     // return ElevatedButton(
     //   onPressed: function,
     //   style: ElevatedButton.styleFrom(
@@ -48,7 +48,7 @@ class MyButtons {
     // );
 
     //--USING MATERIAL BUTTON (will take all Width):
-    //----------------------------------------------------------------    
+    //----------------------------------------------------------------
     return MaterialButton(
       onPressed: function,
       hoverColor: kTransparent,
@@ -80,6 +80,11 @@ class MyButtons {
   static Widget danger(
       BuildContext context, String label, Function() function) {
     return showMyButtons(context, label, kWhite, kRed, function,
+        outlined: false, gradiented: false);
+  }
+
+  static Widget disabled(BuildContext context, String label) {
+    return showMyButtons(context, label, kWhite, kGrey, () {},
         outlined: false, gradiented: false);
   }
 
