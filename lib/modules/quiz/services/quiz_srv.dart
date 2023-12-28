@@ -21,7 +21,7 @@ class QuizService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ${authData.accessToken}'
     });
-    // print('==>getExamByCateg '+url.toString());
+    // print('==>getExamByCateg ' + url.toString());
     // print(response.statusCode);
     // print(response.body);
     // var examData = jsonDecode(response.body)['data'];
@@ -38,7 +38,7 @@ class QuizService {
   static Future<Either<String, String>> createExam() async {
     var url = Uri.parse(BASE_URL + 'create-ujian');
     final authData = await AuthorizationService.getAuthData();
-    var response = await http.get(url, headers: {
+    var response = await http.post(url, headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ${authData.accessToken}'
     });
@@ -54,8 +54,32 @@ class QuizService {
 
   //--Get xx:
   // ========================================================================
+  static Future<Either<String, String>> createExamByCategory(
+      String category) async {
+    var url = Uri.parse(BASE_URL + 'create-exam-by-category');
+    final authData = await AuthorizationService.getAuthData();
+    var response = await http.post(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${authData.accessToken}'
+      },
+      body: jsonEncode({"category": category}),
+    );
+    // print('==>createExamByCategory '+url.toString());
+    // print(response.statusCode);
+    // print(response.body);
+    if (response.statusCode == 200) {
+      return Right('Success: Exam Created');
+    } else {
+      return Left('Fail : createExamByCategory');
+    }
+  }
+
+  //--Get xx:
+  // ========================================================================
   static Future<Either<String, String>> postExamAnswer(
-      int soalId, String answer) async {
+      int soalId, String answer, String category) async {
     var url = Uri.parse(BASE_URL + 'jawab-soal-ujian');
     final authData = await AuthorizationService.getAuthData();
     var response = await http.post(
@@ -64,12 +88,13 @@ class QuizService {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${authData.accessToken}'
       },
-      body: jsonEncode({"soal_id": soalId, "jawaban": answer}),
+      body: jsonEncode(
+          {"soal_id": soalId, "jawaban": answer, "category": category}),
     );
-    // print("soal_id: $soalId , jawaban: $answer");
-    // print('==>postExamAnswer. URL: '+url.toString());
-    // print(response.statusCode);
-    // print(response.body);
+    print("soal_id: $soalId , jawaban: $answer");
+    print('==>postExamAnswer. URL: ' + url.toString());
+    print(response.statusCode);
+    print(response.body);
     if (response.statusCode == 200) {
       return Right('Success: Exam has been answered');
     } else {

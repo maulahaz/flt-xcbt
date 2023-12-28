@@ -14,7 +14,7 @@ class QuizListPage extends StatefulWidget {
 class _QuizListPageState extends State<QuizListPage> {
   @override
   void initState() {
-    // context.read<ExamByCategBloc>().add(GetExamByCateg('Area-3'));
+    context.read<ExamByCategBloc>().add(GetExamByCateg('Area-2'));
     super.initState();
   }
 
@@ -25,8 +25,7 @@ class _QuizListPageState extends State<QuizListPage> {
         image: 'lib/assets/images/documents.png',
         name: 'Area-1',
         type: 'Multiple Choice',
-        description:
-            'Collection of some Question about Area-0 and 1',
+        description: 'Collection of some Question about Area-0 and 1',
         duration: 30,
         kategori: 'Area-1',
       ),
@@ -34,8 +33,7 @@ class _QuizListPageState extends State<QuizListPage> {
         image: 'lib/assets/images/documents.png',
         name: 'Area-2',
         type: 'Multiple Choice',
-        description:
-            'Collection of some Question about Area-2',
+        description: 'Collection of some Question about Area-2',
         duration: 30,
         kategori: 'Area-2',
       ),
@@ -43,8 +41,7 @@ class _QuizListPageState extends State<QuizListPage> {
         image: 'lib/assets/images/documents.png',
         name: 'Area-3',
         type: 'Multiple Choice',
-        description:
-            'Collection of some Question about Area-3',
+        description: 'Collection of some Question about Area-3',
         duration: 30,
         kategori: 'Area-3',
       ),
@@ -52,8 +49,7 @@ class _QuizListPageState extends State<QuizListPage> {
         image: 'lib/assets/images/documents.png',
         name: 'Area-9',
         type: 'Multiple Choice',
-        description:
-            'Collection of some Question about Area-9',
+        description: 'Collection of some Question about Area-9',
         duration: 30,
         kategori: 'Area-9',
       ),
@@ -83,31 +79,17 @@ class _QuizListPageState extends State<QuizListPage> {
           const SizedBox(height: 30.0),
           BlocListener<ExamByCategBloc, ExamByCategState>(
             listener: (context, state) {
-              if (state is ExamByCategLoading) {
-                context.read<CreateExamBloc>().add(CreateExam());
-                // return Text('Empty Listener');
-              }
+              // if (state is ExamByCategEmpty) {
+              //   context.read<CreateExamBloc>().add(CreateExam());
+              // }
             },
             child: BlocBuilder<ExamByCategBloc, ExamByCategState>(
               builder: (context, state) {
-                // if (state is ExamByCategSuccess) {
-                //   return ListView.separated(
-                //       shrinkWrap: true,
-                //       physics: const NeverScrollableScrollPhysics(),
-                //       itemCount: datas.length,
-                //       separatorBuilder: (context, index) =>
-                //           const SizedBox(height: 18.0),
-                //       itemBuilder: (context, index) {
-                //         return QuizCard(
-                //           data: datas[index],
-                //         );
-                //       });
-                // }
                 if (state is ExamByCategLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else {
+                } else if (state is ExamByCategSuccess) {
                   return ListView.separated(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -119,6 +101,34 @@ class _QuizListPageState extends State<QuizListPage> {
                           data: datas[index],
                         );
                       });
+                } 
+                // else if (state is ExamByCategEmpty) {
+                //   return BlocBuilder<CreateExamBloc, CreateExamState>(
+                //     builder: (context, state) {
+                //       if (state is CreateExamLoading) {
+                //         return Center(
+                //           child: CircularProgressIndicator(),
+                //         );
+                //       } else if (state is CreateExamSuccess) {
+                //         return ListView.separated(
+                //             shrinkWrap: true,
+                //             physics: const NeverScrollableScrollPhysics(),
+                //             itemCount: datas.length,
+                //             separatorBuilder: (context, index) =>
+                //                 const SizedBox(height: 18.0),
+                //             itemBuilder: (context, index) {
+                //               return QuizCard(
+                //                 data: datas[index],
+                //               );
+                //             });
+                //       } else {
+                //         return Text('Exam not found');
+                //       }
+                //     },
+                //   );
+                // } 
+                else {
+                  return Text('null');
                 }
               },
             ),

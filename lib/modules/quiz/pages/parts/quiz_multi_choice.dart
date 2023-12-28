@@ -112,6 +112,7 @@ class _QuizMultiChoiceState extends State<QuizMultiChoice> {
                           context.read<ExamBloc>().add(PostExamAnswer(
                                 soalId: state.data[state.index].id,
                                 answer: jawaban,
+                                category: widget.kategori,
                               ));
                           context.read<DaftarSoalBloc>().add(NextDaftarSoal());
                         })
@@ -119,6 +120,7 @@ class _QuizMultiChoiceState extends State<QuizMultiChoice> {
                           context.read<ExamBloc>().add(PostExamAnswer(
                                 soalId: state.data[state.index].id,
                                 answer: jawaban,
+                                category: widget.kategori,
                               ));
                           context
                               .read<ExamBloc>()

@@ -13,6 +13,7 @@ export 'services/quiz_srv.dart';
 
 //--PAGES AND PARTS
 export 'pages/quiz_list_pg.dart';
+export 'pages/quiz_select_pg.dart';
 export 'pages/quiz_start_pg.dart';
 export 'pages/quiz_finish_pg.dart';
 export 'pages/quiz_result_pg.dart';

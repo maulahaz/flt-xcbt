@@ -60,7 +60,8 @@ class _HomeViewState extends State<HomeView> {
                 imagePath: 'lib/assets/images/quiz.png',
                 label: 'Quiz',
                 onPressed: () {
-                  context.push(const QuizListPage());
+                  // context.push(const QuizListPage());
+                  context.push(const QuizSelectPage());
                 },
               ),
             ],

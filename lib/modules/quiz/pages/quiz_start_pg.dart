@@ -21,9 +21,7 @@ class QuizStartPage extends StatefulWidget {
 class _QuizStartPageState extends State<QuizStartPage> {
   @override
   void initState() {
-    context.read<ExamByCategBloc>().add(
-          GetExamByCateg(widget.data.kategori),
-        );
+    context.read<ExamByCategBloc>().add(GetExamByCateg(widget.data.kategori));
     super.initState();
   }
 
@@ -47,7 +45,7 @@ class _QuizStartPageState extends State<QuizStartPage> {
                         builder: (context) => AlertDialog(
                               title: const Text('Time\'s up'),
                               content: const Text(
-                                  'Time is elpased, please click button to check the result'),
+                                  'Time is elapsed, please click button to check the result'),
                               actions: [
                                 TextButton(
                                     onPressed: () =>
@@ -59,10 +57,14 @@ class _QuizStartPageState extends State<QuizStartPage> {
                               ],
                             ));
                   } else {
-                    context.read<DaftarSoalBloc>().add(GetDaftarSoal(
-                          state.result.data,
-                        ));
+                    context
+                        .read<DaftarSoalBloc>()
+                        .add(GetDaftarSoal(state.result.data));
                   }
+                } else if (state is ExamByCategEmpty) {
+                  // MyDialogs.alert(context, 'Error', 'Data not available');
+                  context.read<CreateExamBloc>().add(
+                      CreateExamByCategory(category: widget.data.kategori));
                 }
                 ;
               },
@@ -106,9 +108,7 @@ class _QuizStartPageState extends State<QuizStartPage> {
         children: [
           const Text(
             'Question',
-            style: TextStyle(
-              fontSize: 18,
-            ),
+            style: TextStyle(fontSize: 18),
           ),
           BlocListener<ExamBloc, ExamState>(
             listener: (context, state) {

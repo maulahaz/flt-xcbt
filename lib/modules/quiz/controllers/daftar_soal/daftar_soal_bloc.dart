@@ -22,7 +22,6 @@ class DaftarSoalBloc extends Bloc<DaftarSoalEvent, DaftarSoalState> {
 
   Future<void> _nextDaftarSoal(event, emit) async {
     final curState = state as DaftarSoalSuccess;
-    // final curState = DaftarSoalSuccess(event.data, 0, event.data.length > 1);
     emit(DaftarSoalSuccess(
       curState.data,
       curState.index + 1,

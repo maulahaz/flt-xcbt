@@ -22,7 +22,7 @@ class ExamBloc extends Bloc<ExamEvent, ExamState> {
   Future<void> _postExamAnswer(event, emit) async {
     emit(ExamLoadingState());
     final response =
-        await QuizService.postExamAnswer(event.soalId, event.answer);
+        await QuizService.postExamAnswer(event.soalId, event.answer, event.category);
     response.fold(
         (L) => emit(ExamErrorState(L)), (R) => emit(PostExamResultState()));
   }

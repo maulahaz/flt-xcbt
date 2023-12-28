@@ -12,6 +12,7 @@ final class GetExamResult extends ExamEvent {
 final class PostExamAnswer extends ExamEvent {
   final int soalId;
   final String answer;
+  final String category;
 
-  PostExamAnswer({required this.soalId, required this.answer});
+  PostExamAnswer({required this.soalId, required this.answer,required this.category});
 }

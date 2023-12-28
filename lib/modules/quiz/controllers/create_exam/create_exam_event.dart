@@ -4,3 +4,9 @@ part of 'create_exam_bloc.dart';
 sealed class CreateExamEvent {}
 
 final class CreateExam extends CreateExamEvent {}
+
+final class CreateExamByCategory extends CreateExamEvent {
+  final String category;
+
+  CreateExamByCategory({required this.category});
+}
