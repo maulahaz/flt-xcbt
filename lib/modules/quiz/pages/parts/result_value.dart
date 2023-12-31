@@ -11,15 +11,15 @@ class ResultValue extends StatelessWidget {
   const ResultValue.correct(
     this.value, {
     super.key,
-    this.label = 'Benar',
-    this.color = kGreen,
+    this.label = 'Correct',
+    this.color = kAppPrimary,
   });
 
   const ResultValue.wrong(
     this.value, {
     super.key,
-    this.label = 'Salah',
-    this.color = kAppPrimary,
+    this.label = 'Wrong',
+    this.color = kRed,
   });
 
   @override

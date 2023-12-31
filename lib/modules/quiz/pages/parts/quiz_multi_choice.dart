@@ -116,7 +116,7 @@ class _QuizMultiChoiceState extends State<QuizMultiChoice> {
                               ));
                           context.read<DaftarSoalBloc>().add(NextDaftarSoal());
                         })
-                      : MyButtons.danger(context, 'End', () {
+                      : MyButtons.danger(context, 'Last', () {
                           context.read<ExamBloc>().add(PostExamAnswer(
                                 soalId: state.data[state.index].id,
                                 answer: jawaban,
@@ -124,7 +124,7 @@ class _QuizMultiChoiceState extends State<QuizMultiChoice> {
                               ));
                           context
                               .read<ExamBloc>()
-                              .add(GetExamResult(widget.kategori));
+                              .add(GetExamResultByCategory(widget.kategori));
                         })
             ],
           );

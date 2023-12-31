@@ -1,8 +1,4 @@
 //--CONTROLLERS
-//---Auth/Login
-export 'controllers/login/login_bloc.dart';
-export 'controllers/login/login_event.dart';
-export 'controllers/login/login_state.dart';
 //---Auth/Signup
 export 'controllers/signup/signup_bloc.dart';
 //---Auth/Signin

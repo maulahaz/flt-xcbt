@@ -7,6 +7,7 @@ export 'controllers/exam/exam_bloc.dart';
 //--MODELS
 export 'models/quiz_mdl.dart';
 export 'models/exam_mdl.dart';
+export 'models/exam_result_mdl.dart';
 
 //--SERVICES
 export 'services/quiz_srv.dart';
@@ -24,4 +25,6 @@ export 'pages/parts/answer_choices.dart';
 export 'pages/parts/countdown_timer.dart';
 export 'pages/parts/quiz_multi_choice.dart';
 export 'pages/parts/quiz_result_last.dart';
+export 'pages/parts/quiz_result_card.dart';
+export 'pages/parts/quiz_result_history_card.dart';
 export 'pages/parts/result_value.dart';

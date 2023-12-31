@@ -35,6 +35,28 @@ class QuizService {
 
   //--Get xx:
   // ========================================================================
+  static Future<Either<String, ExamModel>> getExamQuestionByCateg(
+      String category) async {
+    var url = Uri.parse(BASE_URL + 'get-exam-question-by-category?kategori=$category');
+    final authData = await AuthorizationService.getAuthData();
+    var response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ${authData.accessToken}'
+    });
+    // print('==>getExamQuestionByCateg ' + url.toString());
+    // print(response.statusCode);
+    // print(response.body);
+    // var examData = jsonDecode(response.body)['data'];
+    // print(examData);
+    if (response.statusCode == 200) {
+      return Right(ExamModel.fromJson(response.body));
+    } else {
+      return Left('Fail : getExamQuestionByCateg');
+    }
+  }
+
+  //--Get xx:
+  // ========================================================================
   static Future<Either<String, String>> createExam() async {
     var url = Uri.parse(BASE_URL + 'create-ujian');
     final authData = await AuthorizationService.getAuthData();
@@ -91,10 +113,10 @@ class QuizService {
       body: jsonEncode(
           {"soal_id": soalId, "jawaban": answer, "category": category}),
     );
-    print("soal_id: $soalId , jawaban: $answer");
-    print('==>postExamAnswer. URL: ' + url.toString());
-    print(response.statusCode);
-    print(response.body);
+    // print('==>postExamAnswer. URL: ' + url.toString());
+    // print("soal_id: $soalId , jawaban: $answer");
+    // print(response.statusCode);
+    // print(response.body);
     if (response.statusCode == 200) {
       return Right('Success: Exam has been answered');
     } else {
@@ -104,8 +126,8 @@ class QuizService {
 
   //--Get xx:
   // ========================================================================
-  static Future<Either<String, String>> getExamResult(String category) async {
-    var url = Uri.parse(BASE_URL + 'get-exam-result?category=$category');
+  static Future<Either<String, String>> getExamResultByCategory(String category) async {
+    var url = Uri.parse(BASE_URL + 'get-exam-result-by-category?category=$category');
     final authData = await AuthorizationService.getAuthData();
     var response = await http.get(
       url,
@@ -114,8 +136,7 @@ class QuizService {
         'Authorization': 'Bearer ${authData.accessToken}'
       },
     );
-    // print("soal_id: $soalId , jawaban: $answer");
-    // print('==>postExamAnswer. URL: '+url.toString());
+    // print('==>getExamResultByCategory. URL: '+url.toString());
     // print(response.statusCode);
     // print(response.body);
     var resBody = jsonDecode(response.body);
@@ -124,7 +145,31 @@ class QuizService {
     if (response.statusCode == 200) {
       return Right("Result is $result");
     } else {
-      return Left('Fail : getExamResult');
+      return Left('Fail : getExamResultByCategory');
     }
   }
+
+  //--Get xx:
+  // ========================================================================
+  static Future<Either<String, ExamResultModel>> getExamResult() async {
+    var url = Uri.parse(BASE_URL + 'get-exam-result');
+    final authData = await AuthorizationService.getAuthData();
+    var response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${authData.accessToken}'
+      },
+    );
+    // print('==>getExamResult. URL: '+url.toString());
+    // print(response.statusCode);
+    // print(response.body);
+    // var resBody = jsonDecode(response.body);
+    // var result = resBody["data"];
+    if (response.statusCode == 200) {
+      return Right(examResultModelFromJson(response.body));
+    } else {
+      return Left('Fail : getExamResult');
+    }
+  }  
 }

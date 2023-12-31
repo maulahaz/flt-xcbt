@@ -5,18 +5,19 @@ import '../../../../configs/all_configs.dart';
 import '../../x_quizes.dart';
 
 class QuizResultLast extends StatelessWidget {
-  const QuizResultLast({super.key});
+  final ExamResult lastExamResult;
+  const QuizResultLast({super.key, required this.lastExamResult});
 
   @override
   Widget build(BuildContext context) {
-    const correct = 23;
-    const wrong = 12;
-    const totalQuestion = correct + wrong;
+    var correct = lastExamResult.totalCorrect;
+    var wrong = lastExamResult.totalSoal - lastExamResult.totalCorrect;
+    var totalQuestion = lastExamResult.totalSoal;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          'Last Quiz Result',
+          'Quiz Result',
           style: TextStyle(
             fontSize: 21,
             fontWeight: FontWeight.w500,
@@ -47,7 +48,7 @@ class QuizResultLast extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'All Quizes',
+                      lastExamResult.kategori,
                       style: TextStyle(
                         fontSize: 21,
                         fontWeight: FontWeight.w500,
@@ -68,8 +69,8 @@ class QuizResultLast extends StatelessWidget {
                       totalSteps: totalQuestion,
                       currentStep: correct,
                       stepSize: 10,
-                      selectedColor: kGreen,
-                      unselectedColor: kAppPrimary,
+                      selectedColor: kAppPrimary,
+                      unselectedColor: kRed,
                       padding: 0,
                       width: 140,
                       height: 140,

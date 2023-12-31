@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xcbt/extensions/x_extensions.dart';
 
 import '../../../configs/all_configs.dart';
 import '../../../widgets/all_widgets.dart';
 import '../x_quizes.dart';
 
-class QuizResultPage extends StatelessWidget {
+class QuizResultPage extends StatefulWidget {
   const QuizResultPage({super.key});
+
+  @override
+  State<QuizResultPage> createState() => _QuizResultPageState();
+}
+
+class _QuizResultPageState extends State<QuizResultPage> {
+  @override
+  void initState() {
+    context.read<ExamBloc>().add(GetExamResult());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,43 +26,58 @@ class QuizResultPage extends StatelessWidget {
     const paddingHorizontal =
         EdgeInsets.symmetric(horizontal: paddingHorizontalSize);
 
-    final List<QuizModel> datas = [
-      QuizModel(
-          image: 'lib/assets/images/documents.png',
-          name: 'Tes Angka',
-          type: 'Multiple Choice',
-          description:
-              'Tes angka adalah suatu jenis tes psikometri yang dirancang untuk mengukur kemampuan individu dalam memahami, menganalisis, dan menyelesaikan masalah yang melibatkan angka dan matematika.',
-          duration: 30,
-          kategori: 'Numeric'),
-      QuizModel(
-        image: 'lib/assets/images/documents.png',
-        name: 'Tes Logika',
-        type: 'Multiple Choice',
-        description:
-            'Tes logika adalah metode evaluasi yang digunakan untuk mengukur kemampuan seseorang dalam berpikir secara logis, analitis, dan rasional',
-        duration: 30,
-        kategori: 'Logika',
-      ),
-      QuizModel(
-        image: 'lib/assets/images/documents.png',
-        name: 'Tes Verbal',
-        type: 'Multiple Choice',
-        description:
-            'Tes verbal adalah suatu metode evaluasi yang digunakan untuk mengukur kemampuan seseorang dalam menggunakan dan memahami bahasa lisan atau tertulis.',
-        duration: 30,
-        kategori: 'Verbal',
-      ),
-    ];
+    // final List<QuizModel> datas = [
+    //   QuizModel(
+    //       image: 'lib/assets/images/documents.png',
+    //       name: 'Tes Angka',
+    //       type: 'Multiple Choice',
+    //       description:
+    //           'Tes angka adalah suatu jenis tes psikometri yang dirancang untuk mengukur kemampuan individu dalam memahami, menganalisis, dan menyelesaikan masalah yang melibatkan angka dan matematika.',
+    //       duration: 30,
+    //       kategori: 'Numeric'),
+    //   QuizModel(
+    //     image: 'lib/assets/images/documents.png',
+    //     name: 'Tes Logika',
+    //     type: 'Multiple Choice',
+    //     description:
+    //         'Tes logika adalah metode evaluasi yang digunakan untuk mengukur kemampuan seseorang dalam berpikir secara logis, analitis, dan rasional',
+    //     duration: 30,
+    //     kategori: 'Logika',
+    //   ),
+    //   QuizModel(
+    //     image: 'lib/assets/images/documents.png',
+    //     name: 'Tes Verbal',
+    //     type: 'Multiple Choice',
+    //     description:
+    //         'Tes verbal adalah suatu metode evaluasi yang digunakan untuk mengukur kemampuan seseorang dalam menggunakan dan memahami bahasa lisan atau tertulis.',
+    //     duration: 30,
+    //     kategori: 'Verbal',
+    //   ),
+    // ];
 
     return AppScaffold(
       appBarTitle: const Text('Quiz Result'),
       body: ListView(
         children: [
           const SizedBox(height: 30.0),
-          const Padding(
+          Padding(
             padding: paddingHorizontal,
-            child: QuizResultLast(),
+            child: BlocBuilder<ExamBloc, ExamState>(
+              builder: (context, state) {
+                if (state is GetExamResultState) {
+                  var lastExamResult = state.result.data.first;
+                  return QuizResultLast(lastExamResult: lastExamResult);
+                } else {
+                  return SizedBox();
+                }
+                // switch (state.runtimeType) {
+                //   case GetExamResultState:
+                //     return QuizResultLast(;
+                //   default:
+                //     return SizedBox();
+                // }
+              },
+            ),
           ),
           const SizedBox(height: 40.0),
           const Padding(
@@ -59,7 +86,7 @@ class QuizResultPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Available Quiz',
+                  'Last Quiz Results',
                   style: TextStyle(
                     fontSize: 21,
                     fontWeight: FontWeight.w500,
@@ -73,13 +100,29 @@ class QuizResultPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
                 horizontal: paddingHorizontalSize - 8.0),
             scrollDirection: Axis.horizontal,
-            child: Row(
-              children: datas
-                  .map((item) => Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: QuizAvailableCard(data: item),
-                      ))
-                  .toList(),
+            child: BlocBuilder<ExamBloc, ExamState>(
+              builder: (context, state) {
+                if (state is GetExamResultState) {
+                  return Row(
+                    children: state.result.data
+                        .map((item) => Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: QuizResultHistoryCard(data: item),
+                            ))
+                        .toList(),
+                  );
+                } else {
+                  return SizedBox();
+                }
+                // return Row(
+                //   children: datas
+                //       .map((item) => Padding(
+                //             padding: const EdgeInsets.all(8.0),
+                //             child: QuizAvailableCard(data: item),
+                //           ))
+                //       .toList(),
+                // );
+              },
             ),
           ),
           const SizedBox(height: 30.0),

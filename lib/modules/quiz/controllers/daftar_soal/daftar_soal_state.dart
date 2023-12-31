@@ -6,6 +6,8 @@ final class DaftarSoalInitial extends DaftarSoalState {}
 
 final class DaftarSoalLoading extends DaftarSoalState {}
 
+final class DaftarSoalEmpty extends DaftarSoalState {}
+
 final class DaftarSoalSuccess extends DaftarSoalState {
   final List<Question> data;
   final int index;

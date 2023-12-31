@@ -12,7 +12,8 @@ class ExamByCategBloc extends Bloc<ExamByCategEvent, ExamByCategState> {
 
   Future<void> _handleGetExamByCateg(event, emit) async {
     emit(ExamByCategLoading());
-    final response = await QuizService.getExamByCateg(event.category);
+    // final response = await QuizService.getExamByCateg(event.category);
+    final response = await QuizService.getExamQuestionByCateg(event.category);
     response.fold((L) => emit(ExamByCategError(L)), (R) {
       if (R.data.isEmpty) {
         emit(ExamByCategEmpty());

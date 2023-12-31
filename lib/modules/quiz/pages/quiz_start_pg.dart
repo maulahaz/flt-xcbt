@@ -62,9 +62,11 @@ class _QuizStartPageState extends State<QuizStartPage> {
                         .add(GetDaftarSoal(state.result.data));
                   }
                 } else if (state is ExamByCategEmpty) {
-                  // MyDialogs.alert(context, 'Error', 'Data not available');
                   context.read<CreateExamBloc>().add(
                       CreateExamByCategory(category: widget.data.kategori));
+                  context
+                      .read<ExamByCategBloc>()
+                      .add(GetExamByCateg(widget.data.kategori));
                 }
                 ;
               },
@@ -88,20 +90,18 @@ class _QuizStartPageState extends State<QuizStartPage> {
             ),
             IconButton(
                 onPressed: () {
+                  context.pushReplacement(QuizFinishPage(
+                    data: widget.data,
+                    timeRemaining: 0,
+                  ));
                   print('Give up');
-                  // context.pushReplacement(QuizFinishPage(
-                  //   data: widget.data,
-                  //   timeRemaining: 0,
-                  // ));
                 },
                 icon: const Icon(
-                  Icons.done,
+                  Icons.exit_to_app,
                   color: Colors.white,
                 )),
           ],
         ),
-
-        // const SizedBox(width: 24.0),
       ],
       body: ListView(
         padding: const EdgeInsets.all(30.0),
@@ -112,7 +112,7 @@ class _QuizStartPageState extends State<QuizStartPage> {
           ),
           BlocListener<ExamBloc, ExamState>(
             listener: (context, state) {
-              if (state is GetExamResultState) {
+              if (state is GetExamResultByCategoryState) {
                 context.pushReplacement(QuizFinishPage(
                   data: widget.data,
                   timeRemaining: 0,
@@ -121,9 +121,6 @@ class _QuizStartPageState extends State<QuizStartPage> {
             },
             child: BlocBuilder<DaftarSoalBloc, DaftarSoalState>(
               builder: (context, state) {
-                // if (state is DaftarSoalEmpty) {
-                //   return Text('Exam not available');
-                // }
                 if (state is DaftarSoalSuccess) {
                   return Row(
                     children: [
@@ -131,6 +128,7 @@ class _QuizStartPageState extends State<QuizStartPage> {
                         child: LinearProgressIndicator(
                           value: (state.index + 1) / state.data.length,
                           color: kAppPrimary,
+                          backgroundColor: kWhite,
                         ),
                       ),
                       const SizedBox(width: 16.0),
@@ -141,7 +139,7 @@ class _QuizStartPageState extends State<QuizStartPage> {
                     ],
                   );
                 } else {
-                  return Text('Error di Timer');
+                  return Text('Generating Question...');
                 }
               },
             ),
