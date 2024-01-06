@@ -17,7 +17,7 @@ class QuizResultLast extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          'Quiz Result',
+          'Your Quiz Result',
           style: TextStyle(
             fontSize: 21,
             fontWeight: FontWeight.w500,
@@ -63,7 +63,8 @@ class QuizResultLast extends StatelessWidget {
               ),
               Flexible(
                 flex: 1,
-                child: Column(
+                child: Stack(
+                  alignment: Alignment.center,
                   children: [
                     CircularStepProgressIndicator(
                       totalSteps: totalQuestion,
@@ -78,6 +79,12 @@ class QuizResultLast extends StatelessWidget {
                       unselectedStepSize: 24,
                       roundedCap: (_, __) => true,
                     ),
+                    Positioned(
+                      top: 50,
+                      child: Text('${lastExamResult.score.toString()}%')),
+                    Positioned(
+                      top: 65,
+                      child: Text(lastExamResult.hasil!)),
                   ],
                 ),
               ),

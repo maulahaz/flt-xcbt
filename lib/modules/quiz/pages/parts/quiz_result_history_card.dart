@@ -81,7 +81,12 @@ class QuizResultHistoryCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 8.0),
                     Text(
-                      data.score.toString(),
+                      '${data.score.toString()}%',
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                    const SizedBox(width: 8.0),
+                    Text(
+                      '(${data.hasil})',
                       style: const TextStyle(fontSize: 12),
                     ),
                   ],
